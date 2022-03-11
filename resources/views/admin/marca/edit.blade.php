@@ -3,14 +3,14 @@
 @section('title', 'Marcas')
 
 @section('content_header')
-<div class="form-row">
-    <div class="col-md-6"></div>
-    <div class="col-md-6 col-xl-12">
-        <h5 style="text-align: right; margin-right: 30px; ">Fecha: @php
-            echo date('d/m/Y');
-        @endphp</h5>
+    <div class="form-row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 col-xl-12">
+            <h5 style="text-align: right; margin-right: 30px; ">Fecha: @php
+                echo date('d/m/Y');
+            @endphp</h5>
+        </div>
     </div>
-</div>
     <h1>Editar Marca</h1>
 @stop
 
@@ -22,9 +22,10 @@
             @csrf
             {{ @method_field('PATCH') }}
             <div class="form-group">
-                <label for="nombre_marcas" >Nombre de la Marca: </label>
-                <input type="text" name="nombre_marcas" id="nombre_marcas" value="{{ old('nombre_marcas', $marca->nombre_marcas) }}"
-                    class="form-control" tabindex="1" autofocus>
+                <label for="nombre_marcas">Nombre de la Marca: </label>
+                <input type="text" name="nombre_marcas" id="nombre_marcas"
+                    value="{{ old('nombre_marcas', $marca->nombre_marcas) }}" class="form-control" tabindex="1"
+                    autofocus>
                 @if ($errors->has('nombre_marcas'))
                     <div class="alert alert-danger">
                         <span class="error text-danger">{{ $errors->first('nombre_marcas') }}</span>
@@ -37,17 +38,6 @@
             {!! Form::close() !!}
         </div>
     </div>
-    <br><br><br><br><br><br><br><br><br><br>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas SOSA</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

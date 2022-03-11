@@ -13,7 +13,7 @@ class UpdateClienteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,23 @@ class UpdateClienteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+
+            'nombre' => 'required|regex:/^[A-Z,a-z, ,á,í,é,ó,ú,ñ]+$/|max:50',
+            'apellido_paterno' => 'nullable|regex:/^[A-Z,a-z, ,á,í,é,ó,ú,ñ]+$/|max:50',
+            'apellido_materno' => 'nullable|regex:/^[A-Z,a-z, ,á,í,é,ó,ú,ñ]+$/|max:50',
+            'dni' => 'nullable|min:7|regex:/^[E,0-9,-]+$/|unique:clientes,dni,' . $this->route('cliente')->id . '|max:10',
+            'direccion' => 'nullable|max:255',
+            'telefono' => 'nullable|min:7|regex:/^[0-9]{7,8}$/|unique:clientes,telefono,' . $this->route('cliente')->id . '|max:8',
+            'celular' => 'nullable|min:8|regex:/^[+,0-9]{8,12}$/|unique:clientes,celular,' . $this->route('cliente')->id . '|max:12',
+            'email' => 'nullable|email|string|unique:clientes,email,' . $this->route('cliente')->id . '|max:100',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'telefono.regex' => 'No se permite texto solo números.',
+            'celular.regex' => 'Solo permite el signo de adición(+).',
+            'dni.regex' => 'Ingrese en mayúscula E para dni extranjero.',
         ];
     }
 }

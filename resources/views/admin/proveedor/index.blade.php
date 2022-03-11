@@ -16,7 +16,7 @@
 
 @section('content')
     {{-- @can('proveedors.create') --}}
-        <a href="{{ route('admin.proveedors.create') }}" class="btn btn-primary mb-2">Crear Proveedor</a>
+        <a href="{{ route('admin.proveedors.create') }}" class="btn btn-secondary mb-2">Crear Proveedor</a>
     {{-- @endcan --}}
     @if (session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -67,17 +67,17 @@
                                     class="eliminar-form">
                                     @method('DELETE')
                                     @csrf
-                                    {{-- @can('proveedors.show') --}}
+                                    @can('proveedors.show')
                                         <a href="{{ route('admin.proveedors.show', $proveedor) }}"
                                             class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('proveedors.edit') --}}
+                                    @endcan
+                                    @can('proveedors.edit')
                                         <a href="{{ route('admin.proveedors.edit', $proveedor) }}"
                                             class="btn btn-success "><i class="fas fa-pen-alt"></i></a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('proveedors.destroy') --}}
+                                    @endcan
+                                    @can('proveedors.destroy')
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </form>
                             </td>
                         </tr>
@@ -86,16 +86,6 @@
             </table>
         </div>
     </div>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas SOSA</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

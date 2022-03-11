@@ -67,7 +67,7 @@ return [
     'usermenu_enabled' => true,
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
+    'usermenu_image' => true,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
 
@@ -194,7 +194,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -247,88 +247,108 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text' => 'Panel de Control',
+            'url' => 'sumajst-dashboard',
+            'icon' => 'fas fa-tachometer-alt',
+            'can' => 'sumajst-dashboard'
+        ],
+        [
+            'text'    => 'Reportes',
+            'icon'    => 'fas fa-file-signature',
+            'can'     => ['reports.reportes'],
+            
+            'submenu' => [
+                [
+                    'text'  => 'Reporte de ventas',
+                    'icon'  => 'fas fa-file-pdf',
+                    'url'   => 'reports',
+                    'can'   => 'reports.reportes',
+                ]
+            ],
+        ],
+        [
             'text'    => 'Almacén',
             'icon'    => 'fas fa-warehouse',
-            // 'can'     => ['marcas.index', 'tipos.index', 'articulos.index'],
+            'can'     => ['marcas.index', 'tipos.index', 'articulos.index'],
 
             'submenu' => [
                 [
                     'text'  => 'Marcas',
-                    'icon'  => 'fas fa-tasks',
+                    'icon'  => 'fas fa-tags',
                     'url'   => 'marcas',
-                    // 'can'   => 'marcas.index',
+                    'can'   => 'marcas.index',
                 ],
                 [
                     'text'  => 'Tipo de Equipos',
-                    'icon'  => 'fas fa-tasks',
+                    'icon'  => 'fab fa-buffer',
                     'url'   => 'tipos',
-                    // 'can'   => 'tipos.index',
+                    'can'   => 'tipos.index',
                 ],
                 [
                     'text'  => 'Artículo',
-                    'icon'  => 'fas fa-procedures',
+                    'icon'  => 'fas fa-desktop',
                     'url'   => 'articulos',
-                    // 'can'   => 'articulos.index',
+                    'can'   => 'articulos.index',
                 ],
             ],
         ],
         [
             'text'    => 'Ingresos/Compras',
-            'icon'    => 'fas fa-warehouse',
-            // 'can'     => ['marcas.index', 'tipos.index', 'articulos.index'],
+            'icon'    => 'fas fa-shopping-cart',
+            'can'     => ['proveedors.index', 'compras.index'],
 
             'submenu' => [
                 [
                     'text'  => 'Proveedores',
-                    'icon'  => 'fas fa-tasks',
+                    'icon'  => 'fas fa-truck',
                     'url'   => 'proveedors',
-                    // 'can'   => 'marcas.index',
+                    'can'   => 'proveedors.index',
                 ],
                 [
                     'text'  => 'Compras',
-                    'icon'  => 'fas fa-tasks',
+                    'icon'  => 'fas fa-luggage-cart',
                     'url'   => 'compras',
-                    // 'can'   => 'tipos.index',
+                    'can'   => 'compras.index',
                 ],
             ],
         ],
         [
             'text'    => 'Ventas',
-            'icon'    => 'fas fa-warehouse',
-            // 'can'     => ['marcas.index', 'tipos.index', 'articulos.index'],
+            'icon'    => 'fas fa-cash-register',
+            'can'     => ['clientes.index', 'ventas.index'],
 
             'submenu' => [
                 [
                     'text'  => 'Clientes',
-                    'icon'  => 'fas fa-tasks',
+                    'icon'  => 'fas fa-id-badge',
                     'url'   => 'clientes',
-                    // 'can'   => 'marcas.index',
+                    'can'   => 'clientes.index',
                 ],
                 [
                     'text'  => 'Pos Venta',
-                    'icon'  => 'fas fa-tasks',
+                    'icon'  => 'fas fa-shopping-basket',
                     'url'   => 'ventas',
-                    // 'can'   => 'tipos.index',
+                    'can'   => 'ventas.index',
                 ],
             ],
         ],
         [
             'text'    => 'Usuarios/Roles',
-            'icon'    => 'fas fa-warehouse',
-            // 'can'     => ['marcas.index', 'tipos.index', 'articulos.index'],
+            'icon'    => 'fas fa-user-cog',
+            'can'     => ['users.index', 'roles.index'],
 
             'submenu' => [
                 [
                     'text'  => 'Usuarios',
-                    'icon'  => 'fas fa-tasks',
+                    'icon'  => 'fas fa-user-tie',
                     'url'   => 'users',
-                    // 'can'   => 'marcas.index',
+                    'can'   => 'users.index',
                 ],
                 [
                     'text'  => 'Roles',
-                    'icon'  => 'fas fa-tasks',
+                    'icon'  => 'fas fa-chalkboard-teacher',
                     'url'   => 'roles',
-                    // 'can'   => 'tipos.index',
+                    'can'   => 'roles.index',
                 ],
             ],
         ],

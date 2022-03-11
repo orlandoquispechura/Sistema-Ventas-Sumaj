@@ -179,9 +179,15 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
-
-        // para codigo de barras
+        // clases para generar codigos de barras
         Milon\Barcode\BarcodeServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
+        
+        //paquete para poder exportar pdf dompdf
+        Barryvdh\DomPDF\ServiceProvider::class,
+
+        // paquete para roles y permisos
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 
@@ -200,7 +206,14 @@ return [
 
         //codigo de barras
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+
+
+        //alias para dompdf  
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        
         
     ])->toArray(),
 

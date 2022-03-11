@@ -15,9 +15,9 @@
 @stop
 
 @section('content')
-    {{-- @can('marcas.create') --}}
-        <a href="{{ route('admin.tipos.create') }}" class="btn btn-primary mb-2">Crear Tipo +</a>
-    {{-- @endcan --}}
+    @can('tipos.create')
+        <a href="{{ route('admin.tipos.create') }}" class="btn btn-secondary mb-2">Crear Tipo +</a>
+    @endcan
 
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -58,19 +58,19 @@
                         <tr>
                             <td style="width: 100px">{{$tipo->id}}</td>
                             <td>{{ ucwords($tipo->nombre_equipo) }}</td>
-                            <td>{{$tipo->descripcion}}</td>
+                            <td>{{Str::ucfirst($tipo->descripcion) }}</td>
                             <td class="text-right" style="width: 100px;">
                                 <form action="{{ route('admin.tipos.destroy', $tipo) }}" method="POST"
                                     class="eliminar-form">
                                     @method('DELETE')
                                     @csrf
-                                    {{-- @can('marcas.edit') --}}
+                                    @can('tipos.edit')
                                         <a href="{{ route('admin.tipos.edit', $tipo) }}" class="btn btn-success "><i class="fas fa-pen-alt"></i>
                                         </a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('marcas.destroy') --}}
+                                    @endcan
+                                    @can('tipos.destroy')
                                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </form>
                             </td>
                         </tr>
@@ -79,17 +79,6 @@
             </table>
         </div>
     </div>
-    <br><br><br><br><br><br><br><br>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas Sumajst</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

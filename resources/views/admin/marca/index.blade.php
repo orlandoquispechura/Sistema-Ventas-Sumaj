@@ -15,9 +15,9 @@
 @stop
 
 @section('content')
-    {{-- @can('marcas.create') --}}
-    <a href="{{ route('admin.marcas.create') }}" class="btn btn-primary mb-2">Crear marca +</a>
-    {{-- @endcan --}}
+    @can('marcas.create')
+    <a href="{{ route('admin.marcas.create') }}" class="btn btn-secondary mb-2">Crear marca +</a>
+    @endcan
 
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -62,13 +62,13 @@
                                     class="eliminar-form">
                                     @method('DELETE')
                                     @csrf
-                                    {{-- @can('marcas.edit') --}}
+                                    @can('marcas.edit')
                                     <a href="{{ route('admin.marcas.edit', $marca) }}" class="btn btn-success "><i class="fas fa-pen-alt"></i>
                                     </a>
-                                    {{-- @endcan --}}
-                                    {{-- @can('marcas.destroy') --}}
+                                    @endcan
+                                    @can('marcas.destroy')
                                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </form>
                             </td>
                         </tr>
@@ -77,17 +77,6 @@
             </table>
         </div>
     </div>
-    <br><br><br><br><br>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas Sumajst</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

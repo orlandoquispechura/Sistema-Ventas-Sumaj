@@ -30,10 +30,10 @@
                                 Sobre el proveedor
                             </button>
                             <button type="button" class="list-group-item list-group-item-action">Artículos</button>
-                            {{-- @can('articulos.create') --}}
+                            @can('articulos.create')
                                 <a href="{{ route('admin.articulos.create') }}"
                                     class="list-group-item list-group-item-action">Registrar artículo </a>
-                            {{-- @endcan --}}
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -89,19 +89,9 @@
             </div>
         </div>
         <div class="card-footer text-muted">
-            <a href="{{ route('admin.proveedors.index') }}" class="btn btn-primary float-right">Regresar</a>
+            <a href="{{ route('admin.proveedors.index') }}" class="btn btn-secondary float-right">Regresar</a>
         </div>
     </div>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas SOSA</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

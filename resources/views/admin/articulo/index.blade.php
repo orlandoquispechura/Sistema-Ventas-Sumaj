@@ -15,9 +15,9 @@
 @stop
 
 @section('content')
-    {{-- @can('articulos.create') --}}
-    <a href="{{ route('admin.articulos.create') }}" class="btn btn-primary mb-2">Crear Equipos +</a>
-    {{-- @endcan --}}
+    @can('articulos.create')
+    <a href="{{ route('admin.articulos.create') }}" class="btn btn-secondary mb-2">Crear Equipos +</a>
+    @endcan
     {{-- <a class="btn btn-warning mb-2" href="{{ route('print_barcode') }}" target="_blank">Exportar códigos de barras</a> --}}
 
     @if (session('success'))
@@ -75,13 +75,13 @@
                                 </td>
                             @endif
                             <td>
-                                {{-- @can('articulos.show') --}}
+                                @can('articulos.show')
                                 <a href="{{ route('admin.articulos.show', $articulo) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                {{-- @endcan --}}
-                                {{-- @can('articulos.edit') --}}
+                                @endcan
+                                @can('articulos.edit')
                                 <a class="btn btn-secondary text-white"
                                     href="{{ route('admin.articulos.edit', $articulo) }}"><i class="fas fa-pen-alt"></i></a>
-                                {{-- @endcan --}}
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -89,16 +89,6 @@
             </table>
         </div>
     </div>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas SOSA</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

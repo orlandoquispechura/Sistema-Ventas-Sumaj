@@ -19,65 +19,69 @@
         <div class="card-body">
             <form action="{{ route('admin.proveedors.store') }}" method="POST">
                 @csrf
-                <div class="form-group">
-                    <label for="razon_social">Nombre Proveedor: </label>
-                    <input type="text" name="razon_social" id="razon_social" value="{{ old('razon_social') }}"
-                        class="form-control" tabindex="1" autofocus>
-                    @if ($errors->has('razon_social'))
-                        <div class="alert alert-danger">
-                            <span class="error text-danger">{{ $errors->first('razon_social') }}</span>
-                        </div>
-                    @endif
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="razon_social">Nombre Proveedor: </label>
+                        <input type="text" name="razon_social" id="razon_social" value="{{ old('razon_social') }}"
+                            class="form-control" tabindex="1" autofocus>
+                        @if ($errors->has('razon_social'))
+                            <div class="alert alert-danger">
+                                <span class="error text-danger">{{ $errors->first('razon_social') }}</span>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="nit">Nº Nit: </label>
+                        <input type="number" name="nit" id="nit" min="0" value="{{ old('nit') }}" class="form-control"
+                            tabindex="2" onkeypress="return esNumero(event)">
+                        @if ($errors->has('nit'))
+                            <div class="alert alert-danger">
+                                <span class="error text-danger">{{ $errors->first('nit') }}</span>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">Email: </label>
+                        <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control"
+                            tabindex="3" placeholder="ejemplo@gmail.com">
+                        @if ($errors->has('email'))
+                            <div class="alert alert-danger">
+                                <span class="error text-danger">{{ $errors->first('email') }}</span>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="telefono">Teléfono: </label>
+                        <input type="text" name="telefono" id="telefono" value="{{ old('telefono') }}"
+                            class="form-control" tabindex="4" onkeypress="return esNumero(event)">
+                        @if ($errors->has('telefono'))
+                            <div class="alert alert-danger">
+                                <span class="error text-danger">{{ $errors->first('telefono') }}</span>
+                            </div>
+                        @endif
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="nit">Nº Nit: </label>
-                    <input type="number" name="nit" id="nit" min="0" value="{{ old('nit') }}" class="form-control"
-                        tabindex="2" onkeypress="return esNumero(event)">
-                    @if ($errors->has('nit'))
-                        <div class="alert alert-danger">
-                            <span class="error text-danger">{{ $errors->first('nit') }}</span>
-                        </div>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="email">Email: </label>
-                    <input type="text" name="email" id="email" value="{{ old('email') }}" class="form-control"
-                        tabindex="3" placeholder="ejemplo@gmail.com">
-                    @if ($errors->has('email'))
-                        <div class="alert alert-danger">
-                            <span class="error text-danger">{{ $errors->first('email') }}</span>
-                        </div>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="direccion">Dirección: </label>
-                    <textarea name="direccion" id="direccion" class="form-control" tabindex="4"
-                        placeholder="Dirección 255 caracteres">{{ old('direccion') }}</textarea>
-                    @if ($errors->has('direccion'))
-                        <div class="alert alert-danger">
-                            <span class="error text-danger">{{ $errors->first('direccion') }}</span>
-                        </div>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono: </label>
-                    <input type="text" name="telefono" id="telefono" value="{{ old('telefono') }}" class="form-control"
-                        tabindex="5" onkeypress="return esNumero(event)">
-                    @if ($errors->has('telefono'))
-                        <div class="alert alert-danger">
-                            <span class="error text-danger">{{ $errors->first('telefono') }}</span>
-                        </div>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="celular">Celular: </label>
-                    <input type="text" name="celular" id="celular" value="{{ old('celular') }}" class="form-control"
-                        tabindex="6">
-                    @if ($errors->has('celular'))
-                        <div class="alert alert-danger">
-                            <span class="error text-danger">{{ $errors->first('celular') }}</span>
-                        </div>
-                    @endif
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="celular">Celular: </label>
+                        <input type="text" name="celular" id="celular" value="{{ old('celular') }}" class="form-control"
+                            tabindex="5">
+                        @if ($errors->has('celular'))
+                            <div class="alert alert-danger">
+                                <span class="error text-danger">{{ $errors->first('celular') }}</span>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="direccion">Dirección: </label>
+                        <textarea name="direccion" id="direccion" class="form-control" tabindex="6"
+                            placeholder="Dirección 255 caracteres">{{ old('direccion') }}</textarea>
+                        @if ($errors->has('direccion'))
+                            <div class="alert alert-danger">
+                                <span class="error text-danger">{{ $errors->first('direccion') }}</span>
+                            </div>
+                        @endif
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-success" tabindex="7">Guardar </button>
                 <a href="{{ route('admin.proveedors.index') }}" class="btn btn-secondary ml-2" tabindex="8">Cancelar</a>

@@ -16,7 +16,7 @@
 
 @section('content')
     @can('users.create')
-        <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-2">Crear Usuarios</a>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-secondary mb-2">Crear Usuarios</a>
     @endcan
     @if (session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -84,17 +84,6 @@
             </table>
         </div>
     </div>
-    <br><br>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas Sumajst</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

@@ -56,7 +56,7 @@
             </tr>
             <tr>
                 <td style="vertical-align: top; padding-top:0px; position: relative;">
-                    <img style="width: 200px; align-content: left" src="imagen/sumaj-logo.png"
+                    <img style="width: 200px; align-content: left" src="imagen/logo-sumaj1.png"
                         alt="logo-reporte.png" width="150" height="70">
                        
                 </td>

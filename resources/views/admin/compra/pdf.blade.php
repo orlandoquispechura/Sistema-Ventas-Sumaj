@@ -15,6 +15,11 @@
 
         .datosproveedor {
             float: left;
+            width: 30%;
+        }
+
+        .datosproveedor h3 {
+            font-size: 15px;
         }
 
         #datos {
@@ -32,20 +37,15 @@
         }
 
         #fact {
-            float: right;
-            margin-top: 2%;
+            width: 27%;
+            float: left;
+            margin-top: 0px;
             margin-left: 2%;
             margin-right: 2%;
             font-size: 20px;
-            color: white;
-            font-weight: bold;
             border-radius: 5px;
-            background: #33AFFF;
-            padding: 0 20px;
-        }
-
-        section {
-            clear: left;
+            color: rgb(7, 7, 7);
+            font-weight: bold;
         }
 
         #cliente {
@@ -73,17 +73,20 @@
             border-bottom: 1px solid #FFFFFF;
         }
 
+        #proveedor {
+            text-align: justify;
+        }
+
         #faccomprador {
             width: 100%;
             border-collapse: collapse;
             border-spacing: 0;
-            margin-bottom: 15px;
         }
 
         #faccomprador thead {
             padding: 20px;
             background: #33AFFF;
-            text-align: center;
+            text-align: left;
             border-bottom: 1px solid #FFFFFF;
         }
 
@@ -101,55 +104,89 @@
             border-bottom: 1px solid #FFFFFF;
         }
 
+        .section-comprador {
+            margin-top: 160px;
+        }
+
+        .imagen {
+            width: 40%;
+            float: left;
+            text-align: center;
+        }
+
+        .dato-empresa {
+            /* width: 100%; */
+            margin-left: 30px;
+            padding-left: 25px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        .footer {
+            margin-top: auto;
+            margin-bottom: 0px;
+            position: sticky;
+        }
+
+        .nota-compra {
+            padding-left: 5px;
+        }
+
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="datosproveedor">
-            <h3>DATOS DEL PROVEEDOR</h3>
-            <p id="proveedor">Nombre: {{ ucwords($compra->proveedor->razon_social) }}<br>
-                Nit: {{ $compra->proveedor->nit }}<br>
-                Teléfono: {{ $compra->proveedor->telefono }}<br>
-                Email: {{ $compra->proveedor->email }}<br>
-                Dirección: {{ ucwords($compra->proveedor->direccion) }}
-            </p>
-        </div>
-        <div id="fact">
-            <p>NOTA DE COMPRA<br />
-                &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; {{ $compra->id }}</p>
-        </div>
-    </header>
-    <br>
-    <br>
-    <section>
-        <div>
+    @for ($i = 1; $i <= 2; $i++)
+        <header>
+            <div class="datosproveedor">
+                <h3>DATOS DEL PROVEEDOR</h3>
+                <p id="proveedor">Nombre: {{ ucwords($compra->proveedor->razon_social) }}<br>
+                    Nit: {{ $compra->proveedor->nit }}<br>
+                    Teléfono: {{ $compra->proveedor->telefono }}<br>
+                    Email: {{ $compra->proveedor->email }}<br>
+                    Dirección: {{ ucwords($compra->proveedor->direccion) }}
+                </p>
+            </div>
+            <div id="fact">
+                <p class="nota-compra">
+                    NOTA DE COMPRA
+                    <br>
+                    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; {{ $compra->id }}
+                </p>
+            </div>
+            <div class="imagen" width="200px;">
+                <img style="width: 200px;" src="imagen/logo-sumaj1.png" alt="logo-sumaj">
+                <p class="dato-empresa">Call-Center: 800107772 <br>
+                    Dirección: Av. Tomas de Lezo <br> entre C/Curuyuqui y Rio grande
+                </p>
+            </div>
+        </header>
+        <br>
+        <section class="section-comprador">
             <table id="faccomprador">
                 <thead>
                     <tr id="fv">
                         <th align="left">COMPRADOR</th>
-                        <th align="left">FECHA COMPRA</th>
+                        <th align="left">FECHA DE COMPRA</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>{{ ucwords($compra->user->name) }}</td>
-                        <td>{{ $compra->fecha_compra }}</td>
+                        <td>{{ \Carbon\Carbon::parse($compra->fecha_compra)->format('d-m-Y H:i a') }}</td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </section>
-    <br>
-    <section>
-        <div>
+        </section>
+        <br>
+        <section>
             <table id="facproducto">
                 <thead>
                     <tr id="fa">
                         <th align="left">CANTIDAD</th>
                         <th align="left">PRODUCTO</th>
                         <th align="left">PRECIO COMPRA (Bs)</th>
-                        <th align="left">SUBTOTAL (Bs)</th>
+                        <th align="right" colspan="2">SUBTOTAL (Bs)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -158,120 +195,36 @@
                             <td>{{ $detallecompra->cantidad }}</td>
                             <td>{{ ucwords($detallecompra->articulo->nombre) }}</td>
                             <td>Bs. {{ $detallecompra->precio_compra }}</td>
-                            <td align="left">Bs.
+                            <td align="right" colspan="2">Bs.
                                 {{ number_format($detallecompra->cantidad * $detallecompra->precio_compra, 2) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="3">
+                        <th colspan="4">
                             <p align="right">TOTAL PAGAR: &nbsp;</p>
                         </th>
                         <td>
-                            <p align="left">Bs. {{ number_format($compra->total, 2) }}
+                            <p align="right">Bs. {{ number_format($compra->total, 2) }}
                             <p>
                         </td>
                     </tr>
 
                 </tfoot>
             </table>
-        </div>
-    </section>
-    <br>
-    <br>
-    <footer>
-        <!--se puede poner un mensaje aqui-->
-        <div id="datos">
-            <p id="encabezado">
-                {{-- <b>{{$company->name}}</b><br>{{$company->description}}<br>Telefono:{{$company->telephone}}<br>Email:{{$company->email}} --}}
-            </p>
-        </div>
-    </footer>
-    <br><br><br><br><br>
-    <header>
-        <div class="datosproveedor">
-            <h3>DATOS DEL PROVEEDOR</h3>
-            <p id="proveedor">Nombre: {{ ucwords($compra->proveedor->razon_social) }}<br>
-                Nit: {{ $compra->proveedor->nit }}<br>
-                Teléfono: {{ $compra->proveedor->telefono }}<br>
-                Email: {{ $compra->proveedor->email }}<br>
-                Dirección: {{ ucwords($compra->proveedor->direccion) }}
-            </p>
-        </div>
-        <div id="fact">
-            <p>NOTA DE COMPRA<br />
-                &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; {{ $compra->id }}</p>
-        </div>
-    </header>
-    <br>
-    <br>
-    <section>
-        <div>
-            <table id="faccomprador">
-                <thead>
-                    <tr id="fv">
-                        <th align="left">COMPRADOR</th>
-                        <th align="left">FECHA COMPRA</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ ucwords($compra->user->name) }}</td>
-                        <td>{{ $compra->fecha_compra }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-    <br>
-    <section>
-        <div>
-            <table id="facproducto">
-                <thead>
-                    <tr id="fa">
-                        <th align="left">CANTIDAD</th>
-                        <th align="left">PRODUCTO</th>
-                        <th align="left">PRECIO COMPRA (Bs)</th>
-                        <th align="left">SUBTOTAL (Bs)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($detallecompras as $detallecompra)
-                        <tr>
-                            <td>{{ $detallecompra->cantidad }}</td>
-                            <td>{{ ucwords($detallecompra->articulo->nombre) }}</td>
-                            <td>Bs. {{ $detallecompra->precio_compra }}</td>
-                            <td align="left">Bs.
-                                {{ number_format($detallecompra->cantidad * $detallecompra->precio_compra, 2) }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="3">
-                            <p align="right">TOTAL PAGAR: &nbsp;</p>
-                        </th>
-                        <td>
-                            <p align="left">Bs. {{ number_format($compra->total, 2) }}
-                            <p>
-                        </td>
-                    </tr>
-
-                </tfoot>
-            </table>
-        </div>
-    </section>
-    <br>
-    <br>
-    <footer>
-        <!--se puede poner un mensaje aqui-->
-        <div id="datos">
-            <p id="encabezado">
-                {{-- <b>{{$company->name}}</b><br>{{$company->description}}<br>Telefono:{{$company->telephone}}<br>Email:{{$company->email}} --}}
-            </p>
-        </div>
-    </footer>
+        </section>
+        <br><br><br><br>
+        <footer>
+            <!--se puede poner un mensaje aqui-->
+            <div>
+                <p>
+                    {{-- <b>{{$company->name}}</b><br>{{$company->description}}<br>Telefono:{{$company->telephone}}<br>Email:{{$company->email}} --}}
+                </p>
+            </div>
+        </footer>
+        <hr>
+    @endfor
 </body>
 
 </html>

@@ -8,6 +8,15 @@ use App\Http\Requests\UpdateClienteRequest;
 
 class ClienteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:clientes.create')->only(['create', 'store']);
+        $this->middleware('can:clientes.index')->only(['index']);
+        $this->middleware('can:clientes.edit')->only(['edit', 'update']);
+        $this->middleware('can:clientes.show')->only(['show']);
+        $this->middleware('can:clientes.destroy')->only(['destroy']);
+    }
     public function index()
     {
         $clientes = Cliente::get();
@@ -19,11 +28,11 @@ class ClienteController extends Controller
     }
     public function store(StoreClienteRequest $request)
     {
+
         Cliente::create($request->all());
         if ($request->venta == 1) {
-            return redirect()->back();
+            return redirect()->back()->with('cliente_venta', 'Se registró al cliente correctamente ✔');
         }
-
         return redirect()->route('admin.clientes.index')->with('success', 'Se registró correctamente');
     }
     public function show(Cliente $cliente)

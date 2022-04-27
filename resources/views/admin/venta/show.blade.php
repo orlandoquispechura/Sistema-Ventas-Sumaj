@@ -77,20 +77,10 @@
             </div>
         </div>
         <div class="card-footer text-muted">
-            <a href="{{route('admin.ventas.index')}}" class="btn btn-primary float-right">Regresar</a>
+            <a href="{{route('admin.ventas.index')}}" class="btn btn-secondary float-right">Regresar</a>
         </div>
     </div>
 </div>
-<footer>
-    <div class="row text-bold " style="color: rgb(135, 141, 153)">
-        <div class="col-md-8">
-            <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas Sumajst</p>
-        </div>
-        <div class="col-md-4">
-            <p class="text-right ">Versión 1.0.0</p>
-        </div>
-    </div>
-</footer>
 @stop
 
 @section('css')

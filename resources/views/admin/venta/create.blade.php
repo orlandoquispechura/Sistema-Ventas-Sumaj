@@ -11,10 +11,28 @@
             @endphp</h5>
         </div>
     </div>
-    <h1>Registrar Venta</h1>
+    <div class="form-row mt-2">
+        <div class="col-md-6">
+            <h1>Registrar Venta</h1>
+        </div>
+        <div class="col-md-6 ">
+            <button type="button" class="btn btn-warning float-right font-weight-bold" data-toggle="modal"
+                data-target="#exampleModal-2">
+                Registrar cliente +
+            </button>
+        </div>
+    </div>
 @stop
 
 @section('content')
+    @if (session('cliente_venta'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong> Guardado!</strong> {{ session('cliente_venta') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card">
         {!! Form::open(['route' => 'admin.ventas.store', 'method' => 'POST']) !!}
         <div class="card-body">
@@ -26,16 +44,89 @@
         </div>
         {!! Form::close() !!}
     </div>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas SOSA</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel-2">Registro rápido de cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {!! Form::open(['route' => 'admin.clientes.store', 'method' => 'POST', 'files' => true]) !!}
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="razon_social">Nombre Cliente: </label>
+                            <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}"
+                                class="form-control" tabindex="1" data-autofocus required>
+                            @if ($errors->has('nombre'))
+                                <div class="alert alert-danger">
+                                    <span class="error text-danger">{{ $errors->first('nombre') }}</span>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="apellido_paterno">Apellido Paterno: </label>
+                            <input type="text" name="apellido_paterno" id="apellido_paterno"
+                                value="{{ old('apellido_paterno') }}" class="form-control" tabindex="2" autofocus>
+                            @if ($errors->has('apellido_paterno'))
+                                <div class="alert alert-danger">
+                                    <span class="error text-danger">{{ $errors->first('apellido_paterno') }}</span>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="dni">CI: </label>
+                            <input type="text" name="dni" id="dni" min="0" value="{{ old('dni') }}"
+                                class="form-control" tabindex="3">
+                            @if ($errors->has('dni'))
+                                <div class="alert alert-danger">
+                                    <span class="error text-danger">{{ $errors->first('dni') }}</span>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="telefono">Teléfono: </label>
+                            <input type="text" name="telefono" id="telefono" value="{{ old('telefono') }}"
+                                class="form-control" tabindex="4" onkeypress="return esNumero(event)">
+                            @if ($errors->has('telefono'))
+                                <div class="alert alert-danger">
+                                    <span class="error text-danger">{{ $errors->first('telefono') }}</span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label for="direccion">Dirección: </label>
+                            <textarea name="direccion" id="direccion" class="form-control" tabindex="5"
+                                placeholder="Direccón 255 caracteres">{{ old('direccion') }}</textarea>
+                            @if ($errors->has('direccion'))
+                                <div class="alert alert-danger">
+                                    <span class="error text-danger">{{ $errors->first('direccion') }}</span>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="venta" value="1">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" tabindex="6">Registrar</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal" tabindex="7">Cancel</button>
+                </div>
+
+                {!! Form::close() !!}
+
             </div>
         </div>
-    </footer>
+    </div>
 @stop
 
 @section('css')
@@ -75,47 +166,47 @@
             $("#stock").val(datosProducto[1]);
         }
 
-        var articulo_id = $('#articulo_id');
+        // var articulo_id = $('#articulo_id');
 
-        articulo_id.change(function() {
-            $.ajax({
-                url: "{{ route('get_products_by_id') }}",
-                method: 'GET',
-                data: {
-                    articulo_id: articulo_id.val(),
-                },
-                success: function(data) {
-                    $("#precio_venta").val(data.precio_venta);
-                    $("#stock").val(data.stock);
-                    $("#codigo").val(data.codigo);
-                }
-            });
-        });
-        $(obtener_registro());
+        // articulo_id.change(function() {
+        //     $.ajax({
+        //         url: "{{ route('get_products_by_id') }}",
+        //         method: 'GET',
+        //         data: {
+        //             articulo_id: articulo_id.val(),
+        //         },
+        //         success: function(data) {
+        //             $("#precio_venta").val(data.precio_venta);
+        //             $("#stock").val(data.stock);
+        //             $("#codigo").val(data.codigo);
+        //         }
+        //     });
+        // });
+        // $(obtener_registro());
 
-        function obtener_registro(codigo) {
-            $.ajax({
-                url: "{{ route('get_products_by_barcode') }}",
-                type: 'GET',
-                data: {
-                    codigo: codigo
-                },
-                dataType: 'json',
-                success: function(data) {
-                    $("#precio_venta").val(data.precio_venta);
-                    $("#stock").val(data.stock);
-                    $("#articulo_id").val(data.id);
-                }
-            });
-        }
-        $(document).on('keyup', '#codigo', function() {
-            var valorResultado = $(this).val();
-            if (valorResultado != "") {
-                obtener_registro(valorResultado);
-            } else {
-                obtener_registro();
-            }
-        })
+        // function obtener_registro(codigo) {
+        //     $.ajax({
+        //         url: "{{ route('get_products_by_barcode') }}",
+        //         type: 'GET',
+        //         data: {
+        //             codigo: codigo
+        //         },
+        //         dataType: 'json',
+        //         success: function(data) {
+        //             $("#precio_venta").val(data.precio_venta);
+        //             $("#stock").val(data.stock);
+        //             $("#articulo_id").val(data.id);
+        //         }
+        //     });
+        // }
+        // $(document).on('keyup', '#codigo', function() {
+        //     var valorResultado = $(this).val();
+        //     if (valorResultado != "") {
+        //         obtener_registro(valorResultado);
+        //     } else {
+        //         obtener_registro();
+        //     }
+        // })
 
         function agregar() {
             datosProducto = document.getElementById('articulo_id').value.split('_');
@@ -134,14 +225,17 @@
                     var fila = '<tr class="selected" id="fila' + cont +
                         '"><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar(' + cont +
                         ');"><i class="fa fa-trash-alt"></i></button></td> <td><input type="hidden" name="articulo_id[]" value="' +
-                        articulo_id + '">' + articulo + '</td> <td> <input type="hidden" name="precio_venta[]" value="' +
+                        articulo_id + '">' + articulo +
+                        '</td> <td> <input type="hidden" name="precio_venta[]" value="' +
                         parseFloat(precio_venta).toFixed(2) + '"> <input class="form-control" type="number" value="' +
                         parseFloat(precio_venta).toFixed(2) +
                         '" disabled> </td> <td> <input type="hidden" name="descuento[]" value="' +
                         parseFloat(descuento) + '"> <input class="form-control" type="number" value="' +
-                        parseFloat(descuento) + '" disabled> </td> <td> <input type="hidden" name="cantidad[]" value="' +
+                        parseFloat(descuento) +
+                        '" disabled> </td> <td> <input type="hidden" name="cantidad[]" value="' +
                         cantidad + '"> <input type="number" value="' + cantidad +
-                        '" class="form-control" disabled> </td> <td align="right">Bs ' + parseFloat(subtotal[cont]).toFixed(
+                        '" class="form-control" disabled> </td> <td align="right">Bs ' + parseFloat(subtotal[cont])
+                        .toFixed(
                             2) + '</td></tr>';
                     cont++;
                     limpiar();

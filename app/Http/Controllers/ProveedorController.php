@@ -7,7 +7,17 @@ use App\Http\Requests\StoreProveedorRequest;
 use App\Http\Requests\UpdateProveedorRequest;
 
 class ProveedorController extends Controller
-{public function index()
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:proveedors.create')->only(['create','store']);
+        $this->middleware('can:proveedors.index')->only(['index']);
+        $this->middleware('can:proveedors.edit')->only(['edit','update']);
+        $this->middleware('can:proveedors.show')->only(['show']);
+        $this->middleware('can:proveedors.destroy')->only(['destroy']);
+    }
+    public function index()
     {
         $proveedors = Proveedor::get();
         return view('admin.proveedor.index', compact('proveedors'));
@@ -38,7 +48,7 @@ class ProveedorController extends Controller
     {
         $item = $proveedor->compras()->count();
         if ($item > 0) {
-            return redirect()->back()->with('error','El proveedor no puede eliminarse, tiene compras registradas.');
+            return redirect()->back()->with('error', 'El proveedor no puede eliminarse, tiene compras registradas.');
         }
         $proveedor->delete();
         return redirect()->route('admin.proveedors.index')->with('delete', 'ok');

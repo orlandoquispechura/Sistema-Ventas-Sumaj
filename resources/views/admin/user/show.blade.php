@@ -64,7 +64,7 @@
                                             @forelse ($user->roles as $role)
                                                 @can('roles.show')
                                                     <a href="{{ route('admin.roles.show', $role) }}"
-                                                        class="bg-primary text-white p-1 mt-2 rounded mt-3 ">{{ $role->name }}</a>
+                                                        class="bg-dark text-white p-1 mt-2 rounded mt-3 ">{{ $role->name }}</a>
                                                 @endcan
                                             @empty <span>
                                                     <h4 class="text-danger">El usuario no tiene rol</h4>
@@ -99,13 +99,13 @@
                                     <div class="table-responsive">
                                         <table id="order-listing"
                                             class="table compra table-striped mt-0.5 table-bordered shadow-lg dt-responsive nowrap">
-                                            <thead class="bg-primary text-white">
+                                            <thead class="bg-dark text-white">
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Fecha</th>
                                                     <th>Total</th>
                                                     <th>Estado</th>
-                                                    <th style="width: 180px;">Acciones</th>
+                                                    <th style="width:120px; text-align: right;">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -119,7 +119,7 @@
 
                                                         @if ($compra->estado == 'VALIDO')
                                                             <td>
-                                                                <a class="btn btn-success btn-sm"
+                                                                <a class="btn btn-success"
                                                                     href="{{ route('cambio.estado.compras', $compra) }}"
                                                                     title="Editar">
                                                                     Activo <i class="fas fa-check"></i>
@@ -134,16 +134,16 @@
                                                                 </a>
                                                             </td>
                                                         @endif
-                                                        <td style="width:180px;">
+                                                        <td style="width:120px; text-align: right">
                                                             @can('compras.pdf')
                                                                 <a href="{{ route('compras.pdf', $compra) }}"
-                                                                    class="btn btn-danger btn-sm">Imprimir <i
+                                                                    class="btn btn-danger "> <i
                                                                         class="far fa-file-pdf"></i></a>
                                                             @endcan
 
                                                             @can('compras.show')
                                                                 <a href="{{ route('admin.compras.show', $compra) }}"
-                                                                    class="btn btn-info btn-sm">Ver <i
+                                                                    class="btn btn-info"> <i
                                                                         class="far fa-eye"></i></a>
                                                             @endcan
                                                         </td>
@@ -175,13 +175,13 @@
                                     <div class="table-responsive">
                                         <table id="order-listing1"
                                             class="table venta table-striped mt-0.5 table-bordered shadow-lg dt-responsive nowrap">
-                                            <thead class="bg-primary text-white">
+                                            <thead class="bg-dark text-white">
                                                 <tr>
                                                     <th>Id</th>
                                                     <th>Fecha</th>
                                                     <th>Total</th>
                                                     <th>Estado</th>
-                                                    <th style="width:180px;">Acciones</th>
+                                                    <th style="width:120px; text-align: right;">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -195,7 +195,7 @@
 
                                                         @if ($venta->estado == 'VALIDO')
                                                             <td>
-                                                                <a class="btn btn-success btn-sm"
+                                                                <a class="btn btn-success"
                                                                     href="{{ route('cambio.estado.ventas', $venta) }}"
                                                                     title="Editar">
                                                                     Activo <i class="fas fa-check"></i>
@@ -203,7 +203,7 @@
                                                             </td>
                                                         @else
                                                             <td>
-                                                                <a class="btn btn-danger btn-sm"
+                                                                <a class="btn btn-danger"
                                                                     href="{{ route('cambio.estado.ventas', $venta) }}"
                                                                     title="Editar">
                                                                     Cancelado <i class="fas fa-times"></i>
@@ -211,16 +211,16 @@
                                                             </td>
                                                         @endif
 
-                                                        <td sstyle="width: 180px;">
+                                                        <td sstyle="width: 120px; text-align: right;">
                                                             @can('ventas.pdf')
                                                                 <a href="{{ route('ventas.pdf', $venta) }}"
-                                                                    class="btn btn-danger btn-sm">Imprimir <i
+                                                                    class="btn btn-danger"> <i
                                                                         class="far fa-file-pdf"></i></a>
                                                             @endcan
 
                                                             @can('ventas.show')
                                                                 <a href="{{ route('admin.ventas.show', $venta) }}"
-                                                                    class="btn btn-info btn-sm">Ver <i
+                                                                    class="btn btn-info"> <i
                                                                         class="far fa-eye"></i></a>
                                                             @endcan
                                                         </td>
@@ -248,17 +248,6 @@
             <a href="{{ route('admin.users.index') }}" class="btn btn-secondary float-right">Regresar</a>
         </div>
     </div>
-    <br><br>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas Sumajst</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

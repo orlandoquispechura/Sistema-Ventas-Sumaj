@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('codigo')->unique()->nullable();
             $table->string('nombre')->unique();
             $table->decimal('precio_venta', 12, 2);
-            $table->string('modelo')->nullable();
-            $table->string('serie')->unique()->nullable();
+            $table->string('modelo')->unique()->nullable()->default('0');
             $table->integer('stock')->default('0');
             $table->enum('estado', ['ACTIVO', 'INACTIVO'])->default('ACTIVO');
 

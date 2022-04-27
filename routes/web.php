@@ -63,7 +63,6 @@ Route::resource('ventas', VentaController::class)->names('admin.ventas')->except
     'edit', 'update', 'destroy'
 ]);
 
-
 Route::get('cambio_de_estado/articulos/{articulo}', [ArticuloController::class, 'cambio_de_estado'])->name('cambio.estado.articulos');
 Route::get('cambio_de_estado/compras/{compra}', [CompraController::class, 'cambio_de_estado'])->name('cambio.estado.compras');
 Route::get('cambio_de_estado/ventas/{venta}', [VentaController::class, 'cambio_de_estado'])->name('cambio.estado.ventas');

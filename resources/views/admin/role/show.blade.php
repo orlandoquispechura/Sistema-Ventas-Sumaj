@@ -51,7 +51,7 @@
                                     <div class="table-responsive">
                                         <table id="order-listing"
                                             class="table table-striped mt-0.5 table-bordered shadow-lg dt-responsive nowrap permisos">
-                                            <thead class="bg-primary text-white">
+                                            <thead class="bg-dark text-white">
                                                 <tr>
                                                     <th>Descripción</th>
                                                 </tr>
@@ -84,7 +84,7 @@
                                     <div class="table-responsive">
                                         <table id="order-listing1"
                                             class="table table-striped mt-0.5 table-bordered shadow-lg dt-responsive nowrap ">
-                                            <thead class="bg-primary text-white">
+                                            <thead class="bg-dark text-white">
                                                 <tr>
                                                     <th>Nombre</th>
                                                     <th>Correo electrónico</th>
@@ -98,20 +98,20 @@
                                                             {{ $user->name }}
                                                         </td>
                                                         <td>{{ $user->email }}</td>
-                                                        <td style="width: 250px;">
+                                                        <td style="width: 200px;">
                                                             {!! Form::open(['route' => ['admin.users.destroy', $user], 'method' => 'DELETE', 'class' => 'eliminar-form']) !!}
                                                             @can('users.show')
                                                                 <a href="{{ route('admin.users.show', $user) }}"
-                                                                    class="btn btn-info">Ver</a>
+                                                                    class="btn btn-info"><i class="fas fa-eye"></i></a>
                                                             @endcan
 
                                                             @can('users.edit')
                                                                 <a class="btn btn-success"
-                                                                    href="{{ route('admin.users.edit', $user) }}">Editar</a>
+                                                                    href="{{ route('admin.users.edit', $user) }}"><i class="fas fa-pen-alt"></i></a>
                                                             @endcan
 
                                                             @can('users.destroy')
-                                                                <button class="btn btn-danger" type="submit">Eliminar</button>
+                                                                <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
                                                             @endcan
 
                                                             {!! Form::close() !!}
@@ -132,17 +132,6 @@
             <a href="{{ route('admin.roles.index') }}" class="btn btn-secondary float-right">Regresar</a>
         </div>
     </div>
-    <br><br><br><br><br>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas SOSA</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

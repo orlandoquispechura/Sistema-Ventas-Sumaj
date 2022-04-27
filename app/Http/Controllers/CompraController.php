@@ -13,6 +13,16 @@ use PDF;
 
 class CompraController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:compras.create')->only(['create', 'store']);
+        $this->middleware('can:compras.index')->only(['index']);
+        $this->middleware('can:compras.show')->only(['show']);
+
+        $this->middleware('can:cambio.estado.compras')->only(['cambio_de_estado']);
+        $this->middleware('can:compras.pdf')->only(['pdf']);
+    }
     public function index()
     {
         $compras = Compra::get();
@@ -64,7 +74,6 @@ class CompraController extends Controller
         $fecha = Carbon::now('America/La_Paz');
         $pdf = PDF::loadView('admin.compra.pdf', compact('compra', 'fecha', 'subtotal', 'detallecompras'));
         return $pdf->stream('Reporte_de_compra.pdf');
-
     }
     public function cambio_de_estado($id)
     {

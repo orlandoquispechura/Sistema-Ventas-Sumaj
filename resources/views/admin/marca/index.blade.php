@@ -16,7 +16,7 @@
 
 @section('content')
     @can('marcas.create')
-    <a href="{{ route('admin.marcas.create') }}" class="btn btn-secondary mb-2">Crear marca +</a>
+        <a href="{{ route('admin.marcas.create') }}" class="btn btn-secondary mb-2">Crear marca +</a>
     @endcan
 
     @if (session('success'))
@@ -63,11 +63,12 @@
                                     @method('DELETE')
                                     @csrf
                                     @can('marcas.edit')
-                                    <a href="{{ route('admin.marcas.edit', $marca) }}" class="btn btn-success "><i class="fas fa-pen-alt"></i>
-                                    </a>
+                                        <a href="{{ route('admin.marcas.edit', $marca) }}" class="btn btn-success "><i
+                                                class="fas fa-pen-alt"></i>
+                                        </a>
                                     @endcan
                                     @can('marcas.destroy')
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     @endcan
                                 </form>
                             </td>

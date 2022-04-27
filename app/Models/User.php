@@ -74,8 +74,6 @@ class User extends Authenticatable
          return $this->hasMany(Compra::class);
      }
 
-
-
      public function adminlte_image()
      {
          return 'imagen/user-logo.png';

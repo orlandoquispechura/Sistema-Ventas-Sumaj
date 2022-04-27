@@ -138,15 +138,15 @@
                                                                 </a>
                                                             </td>
                                                         @endif
-                                                        <td style="width: 230px; text-align: right">
+                                                        <td style="width: 100px; text-align: right">
                                                             @can('ventas.pdf')
                                                                 <a href="{{ route('ventas.pdf', $venta) }}"
-                                                                    class="btn btn-danger">Imprimir <i
+                                                                    class="btn btn-danger"> <i
                                                                         class="far fa-file-pdf"></i></a>
                                                             @endcan
                                                             @can('ventas.show')
                                                                 <a href="{{ route('admin.ventas.show', $venta) }}"
-                                                                    class="btn btn-info">Ver <i
+                                                                    class="btn btn-info"> <i
                                                                         class="far fa-eye"></i></a>
                                                             @endcan
                                                         </td>

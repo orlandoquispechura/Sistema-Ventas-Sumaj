@@ -51,13 +51,14 @@
                         </div>
                     @endif
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="serie">Serie: </label>
-                    <input type="text" name="serie" id="serie" value="{{ old('serie', $articulo->serie) }}"
-                        class="form-control" tabindex="4">
-                    @if ($errors->has('serie'))
+                <div class=" form-group col-md-6">
+                    <label for="stock">Stock: </label>
+                    <input type="number" name="stock" id="stock" min="0" max="100"
+                        value="{{ old('stock', $articulo->stock) }}" class="form-control" tabindex="4" step="1"
+                        oninput="validity.valid||(value='')">
+                    @if ($errors->has('stock'))
                         <div class="alert alert-danger">
-                            <span class="error text-danger">{{ $errors->first('serie') }}</span>
+                            <span class="error text-danger">{{ $errors->first('stock') }}</span>
                         </div>
                     @endif
                 </div>
@@ -81,30 +82,20 @@
                         </div>
                     @endif
                 </div>
-                <div class=" form-group col-md-6">
-                    <label for="stock">Stock: </label>
-                    <input type="number" name="stock" id="stock" min="0" max="100"
-                        value="{{ old('stock', $articulo->stock) }}" class="form-control" tabindex="6" step="1"
-                        oninput="validity.valid||(value='')">
-                    @if ($errors->has('stock'))
-                        <div class="alert alert-danger">
-                            <span class="error text-danger">{{ $errors->first('stock') }}</span>
-                        </div>
-                    @endif
-                </div>
-                <div class="form-group col-md-4">
+              
+                <div class="form-group col-md-6">
                     <label for="precio_venta">Precio Venta: </label>
-                    <input type="number" name="precio_venta" step="0.01" min="0" max="10000" id="precio_venta"
-                        value="{{ old('precio_venta', $articulo->precio_venta) }}" class="form-control" tabindex="7">
+                    <input type="number" name="precio_venta" step="0.01" min="0" max="50000" id="precio_venta"
+                        value="{{ old('precio_venta', $articulo->precio_venta) }}" class="form-control" tabindex="6">
                     @if ($errors->has('precio_venta'))
                         <div class="alert alert-danger">
                             <span class="error text-danger">{{ $errors->first('precio_venta') }}</span>
                         </div>
                     @endif
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="tipo_id">Tipo de equipo: </label>
-                    <select class="form-control" name="tipo_id" id="tipo_id" tabindex="8">
+                    <select class="form-control" name="tipo_id" id="tipo_id" tabindex="7">
                         @foreach ($tipos as $tipo)
                             @if ($tipo->id == $articulo->tipo_id)
                                 <option value="{{ $tipo->id }}" selected>{{ $tipo->nombre_equipo }}</option>
@@ -119,9 +110,10 @@
                         </div>
                     @endif
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label for="proveedor_id">Proveedor: </label>
-                    <select class="form-control" name="proveedor_id" id="proveedor_id" tabindex="9">
+                    <select class="form-control" name="proveedor_id" id="proveedor_id" tabindex="8">
+                       
                         @foreach ($proveedors as $proveedor)
                             @if ($proveedor->id == $articulo->proveedor_id)
                                 <option value="{{ $proveedor->id }}" selected>{{ $proveedor->razon_social }}</option>
@@ -137,8 +129,8 @@
                     @endif
                 </div>
             </div>
-            <button type="submit" class="btn btn-success" tabindex="10">Actualizar </button>
-            <a href="{{ route('admin.articulos.index') }}" class="btn btn-secondary  ml-2 " tabindex="11">Cancelar</a>
+            <button type="submit" class="btn btn-success" tabindex="9">Actualizar </button>
+            <a href="{{ route('admin.articulos.index') }}" class="btn btn-secondary  ml-2 " tabindex="10">Cancelar</a>
 
             {!! Form::close() !!}
         </div>

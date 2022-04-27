@@ -16,7 +16,7 @@
 
 @section('content')
     @can('roles.create')
-        <a href="{{ route('admin.roles.create') }}" class="btn btn-primary mb-2">Crear Rol +</a>
+        <a href="{{ route('admin.roles.create') }}" class="btn btn-secondary mb-2">Crear Rol </a>
     @endcan
     <div class="card">
         <div class="card-body ">
@@ -81,17 +81,6 @@
 
         </div>
     </div>
-    <br><br>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas SOSA</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

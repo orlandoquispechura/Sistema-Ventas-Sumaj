@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClienteRequest;
 use App\Models\Venta;
 use App\Http\Requests\StoreVentaRequest;
-use App\Http\Requests\UpdateVentaRequest;
 use App\Models\Articulo;
 use App\Models\Cliente;
 use App\Models\DetalleVenta;
@@ -15,6 +15,16 @@ use PDF;
 
 class VentaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:ventas.create')->only(['create', 'store']);
+        $this->middleware('can:ventas.index')->only(['index']);
+        $this->middleware('can:ventas.show')->only(['show']);
+        $this->middleware('can:cambio.estado.ventas')->only(['cambio_de_estado']);
+        $this->middleware('can:ventas.pdf')->only(['pdf']);
+    }
+
     public function index()
     {
         $ventas = Venta::get();

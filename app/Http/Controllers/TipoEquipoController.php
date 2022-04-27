@@ -8,6 +8,14 @@ use App\Http\Requests\UpdateTipoEquipoRequest;
 
 class TipoEquipoController extends Controller
 {
+    public function __construct()
+    {        
+        $this->middleware('auth');
+        $this->middleware('can:tipos.create', ['only'=>['create','store']]);
+        $this->middleware('can:tipos.index',['only'=>['index']]);
+        $this->middleware('can:tipos.edit',['only'=>['edit','update']]);
+        $this->middleware('can:tipos.destroy',['only'=>['destroy']]);
+    }
     public function index()
     {
         $tipo_equipos= TipoEquipo::get();

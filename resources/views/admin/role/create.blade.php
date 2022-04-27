@@ -40,7 +40,7 @@
             </div>
 
 
-            @include('admin.role._form')
+            {{-- @include('admin.role._form') --}}
             
             <button type="submit" class="btn btn-primary mr-2">Registrar</button>
             <a href="{{ route('admin.roles.index') }}" class="btn btn-secondary">
@@ -49,16 +49,6 @@
             {!! Form::close() !!}
         </div>
     </div>
-    <footer>
-        <div class="row text-bold " style="color: rgb(135, 141, 153)">
-            <div class="col-md-8">
-                <p class="text-right">&copy; {{ date('Y') }} Sistema de Ventas SOSA</p>
-            </div>
-            <div class="col-md-4">
-                <p class="text-right ">Versión 1.0.0</p>
-            </div>
-        </div>
-    </footer>
 @stop
 
 @section('css')

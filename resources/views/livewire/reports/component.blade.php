@@ -61,33 +61,39 @@
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group">
                                 @can('reporte.pdf')
-                                    <a href="{{ url('report/pdf' . '/' . $userId . '/' . $tipoReporte . '/' . $desde . '/' . $hasta) }}"
-                                        class="btn btn-danger btn-sm btn-block {{ count($data) < 1 ? 'disabled' : '' }}"
-                                        target="_blank">
-                                        Exportar reporte a PDF <i class="fas fa-file-pdf"></i></a>
+                                    @if (isset($desde) && isset($hasta))
+                                        <a href="{{ url('report/pdf' . '/' . $userId . '/' . $tipoReporte . '/' . $desde . '/' . $hasta) }}"
+                                            class="btn btn-danger btn-sm btn-block {{ count($data) < 1 ? 'disabled' : '' }}"
+                                            target="_blank">
+                                            Exportar reporte a PDF <i class="fas fa-file-pdf"></i></a>
+                                    @else
+                                    <div class="bg-danger text-white rounded px-2 mt-1 mb-1 pb-1">
+                                        <h6> Dede selecionar una fecha final 😨😱!!! </h6>
+                                    </div>
+                                    @endif
                                 @endcan
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-9">
-                    <div class="table-responsive">
+                    <div class="table-responsive-lg">
                         <table id="order-listing" class="table table-striped mt-0.5 table-bordered shadow-lg mt-4">
                             <thead class="bg-dark text-white">
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Fecha</th>
-                                    <th>Total</th>
-                                    <th>Estado</th>
-                                    <th>Usuario</th>
-                                    <th style="width:50px;">Ver</th>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col" style="width:50px;">Ver</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (count($data) < 1)
                                     <tr>
                                         <td colspan="6">
-                                            <h5>Sin Resultados</h5>
+                                            <h5 class="text-danger">Sin Resultados...</h5>
                                         </td>
                                     </tr>
                                 @endif

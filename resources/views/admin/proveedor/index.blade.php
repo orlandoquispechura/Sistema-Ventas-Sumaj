@@ -15,9 +15,9 @@
 @stop
 
 @section('content')
-    {{-- @can('proveedors.create') --}}
+    @can('proveedors.create')
         <a href="{{ route('admin.proveedors.create') }}" class="btn btn-secondary mb-2">Crear Proveedor</a>
-    {{-- @endcan --}}
+    @endcan
     @if (session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong> Error !</strong> {{ session('error') }}

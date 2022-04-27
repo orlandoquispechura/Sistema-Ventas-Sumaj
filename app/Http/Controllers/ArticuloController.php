@@ -12,6 +12,17 @@ use Illuminate\Http\Client\Request;
 
 class ArticuloController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:articulos.index')->only(['index']);
+        $this->middleware('can:articulos.create', ['only' => ['create', 'store']]);
+        $this->middleware('can:articulos.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('can:articulos.show', ['only' => ['show']]);
+        $this->middleware('can:articulos.destroy', ['only' => ['destroy']]);
+
+        $this->middleware('can:cambiar.estado.articulos')->only(['cambio_de_estado']);
+    }
     public function index()
     {
         $articulos = Articulo::get();
@@ -43,7 +54,7 @@ class ArticuloController extends Controller
     public function show(Articulo $articulo)
     {
         $codigo = Articulo::get('codigo');
-        return view('admin.articulo.show', compact('articulo','codigo'));
+        return view('admin.articulo.show', compact('articulo', 'codigo'));
     }
     public function edit(Articulo $articulo)
     {
@@ -66,31 +77,31 @@ class ArticuloController extends Controller
 
         return redirect()->route('admin.articulos.index')->with('update', 'Se editó correctamente');
     }
-    public function cambio_de_estado(Articulo $articulo)
-    {
-        if ($articulo->estado == 'ACTIVO') {
-            $articulo->update(['estado' => 'INACTIVO']);
-            return redirect()->back();
-        } else {
-            $articulo->update(['estado' => 'ACTIVO']);
-            return redirect()->back();
-        }
-    }
+    // public function cambio_de_estado(Articulo $articulo)
+    // {
+    //     if ($articulo->estado == 'ACTIVO') {
+    //         $articulo->update(['estado' => 'INACTIVO']);
+    //         return redirect()->back();
+    //     } else {
+    //         $articulo->update(['estado' => 'ACTIVO']);
+    //         return redirect()->back();
+    //     }
+    // }
 
-    public function get_products_by_barcode(Request $request)
-    {
-        if ($request->ajax()) {
-            $articulos = Articulo::where('codigo', $request->codigo)->firstOrFail();
-            return response()->json($articulos);
-        }
-    }
-    public function get_products_by_id(Request $request)
-    {
-        if ($request->ajax()) {
-            $articulos = Articulo::findOrFail($request->articulo_id);
-            return response()->json($articulos);
-        }
-    }
+    // public function get_products_by_barcode(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $articulos = Articulo::where('codigo', $request->codigo)->firstOrFail();
+    //         return response()->json($articulos);
+    //     }
+    // }
+    // public function get_products_by_id(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $articulos = Articulo::findOrFail($request->articulo_id);
+    //         return response()->json($articulos);
+    //     }
+    // }
 
 
     // public function print_barcode()

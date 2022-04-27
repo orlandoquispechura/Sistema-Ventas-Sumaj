@@ -16,7 +16,7 @@
 
 @section('content')
     @can('articulos.create')
-    <a href="{{ route('admin.articulos.create') }}" class="btn btn-secondary mb-2">Crear Equipos +</a>
+        <a href="{{ route('admin.articulos.create') }}" class="btn btn-secondary mb-2">Crear Equipos +</a>
     @endcan
     {{-- <a class="btn btn-warning mb-2" href="{{ route('print_barcode') }}" target="_blank">Exportar códigos de barras</a> --}}
 
@@ -40,12 +40,10 @@
             <table class="table table-striped mt-0.5 table-bordered shadow-lg mt-4" id="articulo">
                 <thead class="bg-dark text-white">
                     <tr>
-                        <th scope="col" width='60px'>Código</th>
+                        <th scope="col" width='100px'>Código</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Modelo/Serie</th>
+                        <th scope="col">Modelo - Serie</th>
                         <th scope="col">Stock</th>
-                        {{-- <th scope="col">Marca</th> --}}
-                        {{-- <th scope="col">Tipo</th> --}}
                         <th>Estado</th>
                         <th scope="col">Acciones</th>
                     </tr>
@@ -55,10 +53,8 @@
                         <tr>
                             <td>{{ $articulo->codigo }}</td>
                             <td>{{ Str::ucfirst($articulo->nombre) }}
-                            <td>{{ $articulo->modelo }}/{{ $articulo->serie }}</td>
+                            <td>{{ $articulo->modelo }} - {{ $articulo->serie }}</td>
                             <td>{{ $articulo->stock }}</td>
-                            {{-- <td class="text-bold">{{ Str::ucfirst($articulo->marca->nombre_marcas) }}</td> --}}
-                            {{-- <td class="text-bold">{{ Str::ucfirst($articulo->tipo->nombre_equipo) }}</td> --}}
                             @if ($articulo->estado == 'ACTIVO')
                                 <td>
                                     <a class="jsgrid-button btn btn-success"
@@ -76,11 +72,13 @@
                             @endif
                             <td>
                                 @can('articulos.show')
-                                <a href="{{ route('admin.articulos.show', $articulo) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('admin.articulos.show', $articulo) }}" class="btn btn-info"><i
+                                            class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('articulos.edit')
-                                <a class="btn btn-secondary text-white"
-                                    href="{{ route('admin.articulos.edit', $articulo) }}"><i class="fas fa-pen-alt"></i></a>
+                                    <a class="btn btn-secondary"
+                                        href="{{ route('admin.articulos.edit', $articulo) }}"><i
+                                            class="fas fa-pen-alt"></i></a>
                                 @endcan
                             </td>
                         </tr>

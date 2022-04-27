@@ -66,44 +66,44 @@
         //     $("#precio_venta").val(datosProducto[1]);
         // } //new
 
-        var articulo_id = $('#articulo_id');
-        articulo_id.change(function() {
-            $.ajax({
-                url: "{{ route('get_products_by_id') }}",
-                method: 'GET',
-                data: {
-                    articulo_id: articulo_id.val(),
-                },
-                success: function(data) {
-                    $("#codigo").val(data.codigo);
-                    // $("#precio_venta").val(data.precio_venta);
-                }
-            });
-        });
-        $(obtener_registro());
+        // var articulo_id = $('#articulo_id');
+        // articulo_id.change(function() {
+        //     $.ajax({
+        //         url: "{{ route('get_products_by_id') }}",
+        //         method: 'GET',
+        //         data: {
+        //             articulo_id: articulo_id.val(),
+        //         },
+        //         success: function(data) {
+        //             $("#codigo").val(data.codigo);
+        //             // $("#precio_venta").val(data.precio_venta);
+        //         }
+        //     });
+        // });
+        // $(obtener_registro());
 
-        function obtener_registro(codigo) {
-            $.ajax({
-                url: "{{ route('get_products_by_barcode') }}",
-                type: 'GET',
-                data: {
-                    codigo: codigo
-                },
-                dataType: 'json',
-                success: function(data) {
-                    console.log(data);
-                    $("#articulo_id").val(data.id);
-                }
-            });
-        }
-        $(document).on('keyup', '#codigo', function() {
-            var valorResultado = $(this).val();
-            if (valorResultado != "") {
-                obtener_registro(valorResultado);
-            } else {
-                obtener_registro();
-            }
-        })
+        // function obtener_registro(codigo) {
+        //     $.ajax({
+        //         url: "{{ route('get_products_by_barcode') }}",
+        //         type: 'GET',
+        //         data: {
+        //             codigo: codigo
+        //         },
+        //         dataType: 'json',
+        //         success: function(data) {
+        //             // console.log(data);
+        //             $("#articulo_id").val(data.id);
+        //         }
+        //     });
+        // }
+        // $(document).on('keyup', '#codigo', function() {
+        //     var valorResultado = $(this).val();
+        //     if (valorResultado != "") {
+        //         obtener_registro(valorResultado);
+        //     } else {
+        //         obtener_registro();
+        //     }
+        // })
 
 
         function agregar() {
@@ -115,7 +115,7 @@
             impuesto = $("#impuesto").val();
 
             if (articulo_id != "" && cantidad != "" && cantidad > 0 && precio_compra != "" && articulo_id != null) {
-                if (precio_compra <= 10000) {
+                if (precio_compra <= 50000) {
                     subtotal[cont] = cantidad * precio_compra;
                     total = total + subtotal[cont];
                     var fila = '<tr class="selected" id="fila' + cont +

@@ -1,5 +1,8 @@
 <?php
 
+use phpDocumentor\Reflection\PseudoTypes\False_;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+
 return [
 
     /*
@@ -46,8 +49,8 @@ return [
     */
 
     'logo' => '<b>SistemaVentas </b>Sumaj',
-    'logo_img' => 'vendor/adminlte/dist/img/logo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img' => 'vendor/adminlte/dist/img/logo-sumaj.png',
+    'logo_img_class' => 'brand-image-xl img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'logo_sumaj',
@@ -66,8 +69,8 @@ return [
 
     'usermenu_enabled' => true,
     'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => true,
+    'usermenu_header_class' => 'bg-danger',
+    'usermenu_image' => false,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
 
@@ -194,7 +197,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => true,
+    'profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Reporte de venta</title>
+<title>Nota de venta</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -25,16 +25,19 @@
     }
 
     #fact {
-        float: right;
-        margin-top: 2%;
+        width: 25%;
+        float: left;
+        margin-top: 0px;
         margin-left: 2%;
         margin-right: 2%;
         font-size: 20px;
         border-radius: 5px;
-        color: white;
+        color: rgb(7, 7, 7);
         font-weight: bold;
-        background: #33AFFF;
-        padding: 0 20px;
+    }
+
+    .nota-venta {
+        padding-left: 5px;
     }
 
     section {
@@ -61,22 +64,8 @@
 
     #facliente thead {
         padding: 20px;
-        background:#33AFFF;
-        text-align: left;
-        border-bottom: 1px solid #FFFFFF;
-    }
-
-    #facvendedor {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin-bottom: 15px;
-    }
-
-    #facvendedor thead {
-        padding: 20px;
         background: #33AFFF;
-        text-align: center;
+        text-align: left;
         border-bottom: 1px solid #FFFFFF;
     }
 
@@ -97,102 +86,151 @@
     #proveedor {
         text-align: justify;
     }
+
+    .datoscliente {
+        float: left;
+        width: 30%;
+    }
+
+    .datoscliente h3 {
+        font-size: 15px;
+    }
+
+    #vendedor thead {
+        padding: 20px;
+        background: #33AFFF;
+        text-align: left;
+        border-bottom: 1px solid #FFFFFF;
+        color:
+    }
+
+    #vendedor {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-bottom: 15px;
+    }
+
+    section {
+        margin-top: 10px;
+    }
+
+    .imagen {
+        width: 40%;
+        float: left;
+        text-align: center;
+    }
+
+    .dato-empresa {
+        margin-left: 30px;
+        padding-left: 25px;
+        text-align: left;
+    }
+
+    .footer {
+        margin-top: auto;
+        margin-bottom: 0px;
+        position: sticky;
+    }
+
+    header {
+        margin-top: 10px;
+    }
+
 </style>
+
 <body>
-    <header>
-        <div>
-            <table id="datos">
+    @for ($i = 1; $i <= 2; $i++)
+        <header>
+            <div class="datoscliente">
+                <h3>DATOS DEL CLIENTE</h3>
+                <p>
+                    Cliente: {{ ucwords($venta->cliente->nombre) }}
+                    {{ Str::ucfirst($venta->cliente->apellido_paterno) }}
+                    {{ Str::ucfirst($venta->cliente->apellido_materno) }}<br>
+                    Ci: {{ $venta->cliente->dni }}<br>
+                    Teléfono: {{ $venta->cliente->telefono }} <br>
+                    Dirección: {{ $venta->cliente->direccion }}
+                </p>
+            </div>
+            <div id="fact">
+                <p class="nota-venta">
+                    NOTA DE VENTA
+                    <br>
+                    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; {{ $venta->id }}
+                </p>
+            </div>
+            <div class="imagen" width="200px">
+                <img style="width: 200px;" src="imagen/logo-sumaj1.png" alt="logo-sumaj">
+                <p class="dato-empresa">Call-Center: 800107772 <br>
+                    Dirección: Av. Tomas de Lezo <br> entre C/Curuyuqui y Rio grande
+                </p>
+            </div>
+        </header>
+        <br>
+        <section>
+            <table id="vendedor">
                 <thead>
-                    <tr>
-                        <td class="proveedor"><h3>DATOS DEL VENDEDOR</h3></td>
+                    <tr id="fv">
+                        <th align="left">FECHA DE VENTA</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="proveedor">
-                            <p>Nombre: {{ ucwords($venta->user->name) }}<br>
-                                Email: {{ $venta->user->email }}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h4>DATOS DEL CLIENTE</h4>
-                            <p class="dato-cliente">
-                                Cliente: {{ ucwords($venta->cliente->nombre) }}
-                                {{ Str::ucfirst($venta->cliente->apellido_paterno) }}<br>
-                                Dni: {{ $venta->cliente->dni }}<br>
-                                Teléfono: {{ $venta->cliente->telefono }}
-                            </p>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td><h4>Fecha de la venta: </h4> </td>
                         <td>{{ \Carbon\Carbon::parse($venta->fecha_venta)->format('d-m-Y H:i a') }}</td>
                     </tr>
-                </tfoot>
+                </tbody>
             </table>
-        </div>
-        <div id="fact">
-            <p>
-                NOTA DE VENTA
-                <br>
-               &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; {{ $venta->id }}
-            </p>
-        </div>
-    </header>
-    <br>
-    <br>
-    <section>
-        <div>
-            <table id="facproducto">
-                <thead>
-                    <tr id="fa">
-                        <th align="left">CANTIDAD</th>
-                        <th align="left">PRODUCTO</th>
-                        <th align="left">PRECIO VENTA(Bs)</th>
-                        <th align="left">DESCUENTO(%)</th>
-                        <th align="left">SUBTOTAL(Bs)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($detalleventas as $detalleventa)
+        </section>
+        <section>
+            <div>
+                <table id="facproducto">
+                    <thead>
+                        <tr id="fa">
+                            <th align="left">CANTIDAD</th>
+                            <th align="left">PRODUCTO</th>
+                            <th align="left">PRECIO VENTA(Bs)</th>
+                            <th align="right" colspan="2">SUBTOTAL(Bs)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($detalleventas as $detalleventa)
+                            <tr>
+                                <td>{{ $detalleventa->cantidad }}</td>
+                                <td>{{ Str::ucfirst($detalleventa->articulo->nombre) }}</td>
+                                <td>Bs. {{ $detalleventa->precio_venta }}</td>
+                                <td align="right" colspan="2">Bs.
+                                    {{ number_format($detalleventa->cantidad * $detalleventa->precio_venta -($detalleventa->cantidad * $detalleventa->precio_venta * $detalleventa->descuento) / 100,2) }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
                         <tr>
-                            <td>{{ $detalleventa->cantidad }}</td>
-                            <td>{{ Str::ucfirst($detalleventa->articulo->nombre) }}</td>
-                            <td>Bs. {{ $detalleventa->precio_venta }}</td>
-                            <td>{{ $detalleventa->descuento }} %</td>
-                            <td align="left">Bs.
-                                {{ number_format($detalleventa->cantidad * $detalleventa->precio_venta - ($detalleventa->cantidad * $detalleventa->precio_venta * $detalleventa->descuento) / 100, 2) }}
+                            <th colspan="4">
+                                <p align="right">TOTAL PAGAR: &nbsp; </p>
+                            </th>
+                            <td>
+                                <p align="right">Bs. {{ number_format($venta->total, 2) }}</p>
                             </td>
                         </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="4">
-                            <p align="right">TOTAL PAGAR: &nbsp; </p>
-                        </th>
-                        <td>
-                            <p align="left">Bs. {{ number_format($venta->total, 2) }}</p>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </section>
-    <br>
-    <br>
-    <footer>
-        <!--puedes poner un mensaje aqui-->
-        <div id="datos">
-            <p id="encabezado">
-                {{-- <b>{{$company->name}}</b><br>{{$company->description}}<br>Telefono:{{$company->telephone}}<br>Email:{{$company->email}} --}}
-            </p>
-        </div>
-    </footer>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+        <br><br><br>
 
+        <footer class="footer">
+            <!--puedes poner un mensaje aqui-->
+            <div>
+                <p>
+                    <strong>NOTA </strong>: Una vez retirado su producto no se aceptan reclamos pasada las 24 Horas!!!
+
+                </p>
+            </div>
+        </footer>
+        <hr>
+    @endfor
 </body>
 
 </html>

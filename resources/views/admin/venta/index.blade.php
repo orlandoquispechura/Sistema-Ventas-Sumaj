@@ -16,9 +16,9 @@
 @stop
 
 @section('content')
-    {{-- @can('ventas.create') --}}
+    @can('ventas.create')
         <a class="btn btn-secondary mb-2" href="{{ route('admin.ventas.create') }}">Nueva venta +</a>
-    {{-- @endcan --}}
+    @endcan
 
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">

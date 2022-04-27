@@ -24,7 +24,7 @@ class StoreTipoEquipoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre_equipo' => 'string|regex:/^[A-Z, a-z, ,á,í,é,ó,ú,ñ]+$/|required|unique:tipo_equipos|max:50',
+            'nombre_equipo' => 'string|regex:/^[A-Z, a-z, ,á,í,é,ó,ú,ñ,0-9]+$/|required|unique:tipo_equipos|max:50',
             'descripcion' => 'nullable|max:255'
         ];
     }

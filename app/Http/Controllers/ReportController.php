@@ -9,6 +9,13 @@ use PDF;
 
 class ReportController extends Controller
 {
+
+    public function __construct()
+    {
+
+        $this->middleware('auth');
+        $this->middleware('can:reporte.pdf')->only(['reporte.pdf']);
+    }
     public function reportePDF($userId, $tipoReporte, $desde = null, $hasta = null)
     {
         $data = [];

@@ -57,6 +57,7 @@ class VentaController extends Controller
             return redirect()->route('admin.ventas.index')->with('error', 'No se registro la venta, verifique los datos antes de registrar la venta');
         }
         return redirect()->route('admin.ventas.index')->with('success', 'Se registró la venta');
+    
     }
     public function show(Venta $venta)
     {

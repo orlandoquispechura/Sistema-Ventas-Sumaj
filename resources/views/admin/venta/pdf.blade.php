@@ -162,8 +162,11 @@
             </div>
             <div class="imagen" width="200px">
                 <img style="width: 200px;" src="imagen/logo-sumaj1.png" alt="logo-sumaj">
-                <p class="dato-empresa">Call-Center: 800107772 <br>
+                {{-- <p class="dato-empresa">Call-Center: 800107772 <br>
                     Dirección: Av. Tomas de Lezo <br> entre C/Curuyuqui y Rio grande
+                </p> --}}
+                <p class="dato-empresa">Call-Center: 800101719 <br>
+                    Dirección: Av. Edmundo Rodas <br> entre C/Medina y Jorochi
                 </p>
             </div>
         </header>
@@ -230,6 +233,7 @@
             </div>
         </footer>
         <hr>
+        <br><br><br>
     @endfor
 </body>
 

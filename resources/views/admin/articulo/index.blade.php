@@ -42,7 +42,7 @@
                     <tr>
                         <th scope="col" width='100px'>Código</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Modelo - Serie</th>
+                        <th scope="col">Modelo</th>
                         <th scope="col">Stock</th>
                         <th>Estado</th>
                         <th scope="col">Acciones</th>
@@ -53,7 +53,7 @@
                         <tr>
                             <td>{{ $articulo->codigo }}</td>
                             <td>{{ Str::ucfirst($articulo->nombre) }}
-                            <td>{{ $articulo->modelo }} - {{ $articulo->serie }}</td>
+                            <td>{{ $articulo->modelo }}</td>
                             <td>{{ $articulo->stock }}</td>
                             @if ($articulo->estado == 'ACTIVO')
                                 <td>

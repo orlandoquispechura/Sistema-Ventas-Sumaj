@@ -78,7 +78,7 @@
 
                     <div class="form-group col-md-4">
                         <label for="tipo_id">Tipo de Equipo: </label>
-                        <select class="form-control selectpicker" data-live-search="true name=" id="tipo_id" tabindex="7">
+                        <select class="form-control selectpicker" data-live-search="true" name="tipo_id" id="tipo_id" tabindex="7">
                             <option value="0">Seleccionar tipo de equipo</option>
                             @foreach ($tipos as $tipo)
                                 <option value="{{ $tipo->id }}">{{ $tipo->nombre_equipo }}</option>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="proveedor_id">Proveedor: </label>
-                        <select class="form-control selectpicker" data-live-search="true name=" proveedor_id"
+                        <select class="form-control selectpicker" data-live-search="true" name="proveedor_id"
                             id="proveedor_id" tabindex="8">
                             <option value="0">Seleccionar proveedor</option>
                             @foreach ($proveedors as $proveedor)

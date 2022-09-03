@@ -86,6 +86,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
 
+       try {
         $item_1 = $user->ventas()->count();
         if ($item_1 > 0) {
             return redirect()->back()->with('error', 'No se puede eliminar este usuario por que tiene ventas realizadas.');
@@ -97,5 +98,8 @@ class UserController extends Controller
 
         $user->delete();
         return redirect()->route('admin.users.index')->with('delete', 'ok');
+       } catch (\Throwable $e) {
+       return $e;
+       }
     }
 }

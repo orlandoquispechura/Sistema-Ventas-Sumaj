@@ -52,13 +52,14 @@
                                     {{ Str::ucfirst($role->name) }}
                                 </td>
                                 <td>{{ Str::ucfirst($role->description) }}</td>
-                                <td style="width: 100px;">
+                                <td class="text-left" style="width: 100px;">
                                     <form action="{{ route('admin.roles.destroy', $role) }}" class="eliminar-form"
                                         method="post">
                                         @csrf
                                         @method('DELETE')
                                         @can('roles.show')
-                                            <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('admin.roles.show', $role) }}" class="btn btn-info"><i
+                                                    class="fas fa-eye"></i></a>
                                         @endcan
                                         @can('roles.edit')
                                             <a class="btn btn-success" href="{{ route('admin.roles.edit', $role) }}">
@@ -67,7 +68,10 @@
                                         @endcan
 
                                         @can('roles.destroy')
-                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                            @if ($role->id !== 1)
+                                                <button type="submit" class="btn btn-danger"><i
+                                                        class="fas fa-trash-alt"></i></button>
+                                            @endif
                                         @endcan
 
                                     </form>
@@ -99,7 +103,7 @@
     <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.8/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.8/js/responsive.bootstrap4.min.js"></script>
-{{-- 
+    {{-- 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
     </script> --}}

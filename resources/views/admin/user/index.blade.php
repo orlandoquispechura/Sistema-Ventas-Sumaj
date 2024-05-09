@@ -59,11 +59,12 @@
                                 {{ ucwords($user->name) }}
                             </td>
                             <td>{{ $user->email }}</td>
-                            <td class="text-right" style="width: 100px;">
+                            <td class="text-left" style="width: 100px;">
                                 {!! Form::open(['route' => ['admin.users.destroy', $user], 'method' => 'DELETE', 'class' => 'eliminar-form']) !!}
 
                                 @can('users.show')
-                                    <a href="{{ route('admin.users.show', $user) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('admin.users.show', $user) }}" class="btn btn-info"><i
+                                            class="fas fa-eye"></i></a>
                                 @endcan
                                 @can('users.edit')
                                     <a class="btn btn-success" href="{{ route('admin.users.edit', $user) }}">
@@ -72,9 +73,11 @@
                                 @endcan
 
                                 @can('users.destroy')
-                                    <button class="btn btn-danger" type="submit">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
+                                    @if ($user->id !== 1)
+                                        <button class="btn btn-danger" type="submit">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    @endif
                                 @endcan
                                 {!! Form::close() !!}
                             </td>

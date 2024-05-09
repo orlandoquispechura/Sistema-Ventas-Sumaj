@@ -64,7 +64,6 @@
                                                 @empty <span class="text-danger">
                                                         <h4>El rol no tiene permisos</h4>
                                                     </span>
-
                                                 @endforelse
                                             </tbody>
                                         </table>
@@ -107,11 +106,15 @@
 
                                                             @can('users.edit')
                                                                 <a class="btn btn-success"
-                                                                    href="{{ route('admin.users.edit', $user) }}"><i class="fas fa-pen-alt"></i></a>
+                                                                    href="{{ route('admin.users.edit', $user) }}"><i
+                                                                        class="fas fa-pen-alt"></i></a>
                                                             @endcan
 
                                                             @can('users.destroy')
-                                                                <button class="btn btn-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                                                @if ($user->id !== 1)
+                                                                    <button class="btn btn-danger" type="submit"><i
+                                                                            class="fas fa-trash-alt"></i></button>
+                                                                @endif
                                                             @endcan
 
                                                             {!! Form::close() !!}
